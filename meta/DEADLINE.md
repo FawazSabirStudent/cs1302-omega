@@ -11,7 +11,7 @@ Markdown is transformed into nice looking HTML.
 > category that you chose, and the primary functions available to users
 > of the app.
 
-TODO WRITE / REPLACE
+This is a test
 
 ## Part 2: New
 
