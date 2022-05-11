@@ -5,9 +5,12 @@ import cs1302.game.DemoGame;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -29,19 +32,25 @@ public class OmegaApp extends Application {
     public void start(Stage stage) {
 
         // some labels to display information
+        HBox menu = new HBox();
+        Button button = new Button("Pause");
         Label title = new Label("Snake!");
         Label instructions
             = new Label("Move with arrow keys");
+
+        menu.getChildren().addAll(title, button);
 
         // demo game provided with the starter code
         DemoGame game = new DemoGame(gridSize * 13, gridSize * 10);
 
         // setup scene
-        VBox root = new VBox(title, instructions, game);
+        VBox root = new VBox(menu, instructions, game);
+        root.setSpacing(15.0);
         Scene scene = new Scene(root);
 
         // setup stage
         stage.setTitle("OmegaApp!");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> Platform.exit());
         stage.sizeToScene();
