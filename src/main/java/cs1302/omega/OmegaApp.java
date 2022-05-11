@@ -6,11 +6,18 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.event.*;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -33,18 +40,31 @@ public class OmegaApp extends Application {
 
         // some labels to display information
         HBox menu = new HBox();
-        Button button = new Button("Pause");
+
+        Button pause = new Button("Pause");
+        Button rst  = new Button ("Restart");
+
         Label title = new Label("Snake!");
         Label instructions
             = new Label("Move with arrow keys");
+        Separator line = new Separator();
+        line.setOrientation(Orientation.HORIZONTAL);
 
-        menu.getChildren().addAll(title, button);
+        menu.getChildren().addAll(title, pause, rst);
+        menu.setSpacing(10.0);
 
         // demo game provided with the starter code
         DemoGame game = new DemoGame(gridSize * 13, gridSize * 10);
 
+        EventHandler<ActionEvent> pauseHandler = event -> game.pause();
+        EventHandler<ActionEvent> rstHandler = event -> game.reset();
+
+        pause.setOnAction(pauseHandler);
+        rst.setOnAction(rstHandler);
+
         // setup scene
-        VBox root = new VBox(menu, instructions, game);
+        VBox root = new VBox(menu, instructions, line, game);
+
         root.setSpacing(15.0);
         Scene scene = new Scene(root);
 
