@@ -16,6 +16,8 @@ import javafx.stage.Stage;
  */
 public class OmegaApp extends Application {
 
+    private final int gridSize = 25;
+
     /**
      * Constructs an {@code OmegaApp} object. This default (i.e., no argument)
      * constructor is executed in Step 2 of the JavaFX Application Life-Cycle.
@@ -26,22 +28,16 @@ public class OmegaApp extends Application {
     @Override
     public void start(Stage stage) {
 
-        // demonstrate how to load local asset using "file:resources/"
-        Image bannerImage = new Image("file:resources/readme-banner.png");
-        ImageView banner = new ImageView(bannerImage);
-        banner.setPreserveRatio(true);
-        banner.setFitWidth(640);
-
         // some labels to display information
-        Label notice = new Label("Modify the starter code to suit your needs.");
+        Label title = new Label("Snake!");
         Label instructions
-            = new Label("Move left/right with arrow keys; click rectangle to teleport.");
+            = new Label("Move with arrow keys");
 
         // demo game provided with the starter code
-        DemoGame game = new DemoGame(640, 240);
+        DemoGame game = new DemoGame(gridSize * 13, gridSize * 10);
 
         // setup scene
-        VBox root = new VBox(banner, notice, instructions, game);
+        VBox root = new VBox(title, instructions, game);
         Scene scene = new Scene(root);
 
         // setup stage

@@ -86,7 +86,7 @@ public abstract class Game extends Region {
      * @param event associated key event
      */
     private void handleKeyPressed(KeyEvent event) {
-        logger.info(event.toString());
+        //logger.info(event.toString());
         keysPressed.set(event.getCode().getCode());
     } // handleKeyPressed
 
@@ -95,7 +95,7 @@ public abstract class Game extends Region {
      * @param event associated key event
      */
     private void handleKeyReleased(KeyEvent event) {
-        logger.info(event.toString());
+        //logger.info(event.toString());
         keysPressed.clear(event.getCode().getCode());
     } // handleKeyReleased
 
