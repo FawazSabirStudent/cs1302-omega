@@ -109,6 +109,8 @@ public class DemoGame extends Game {
 
     /**
      * adds a segment to the snake.
+     * @param x the x coordinate of the segment
+     * @param y the y coordinate of the segment
      */
     protected void addSeg(int x, int y) {
         this.snake.add(new Rectangle(x * size, y * size, size, size));
@@ -182,7 +184,7 @@ public class DemoGame extends Game {
         if (time == 10 && gameOver == false) {
             time = 0;
 
-            switch(face) {
+            switch (face) {
             case UP:
                 snake.get(snake.size() - 1).setY(snake.get(0).getY() - 25);
                 snake.get(snake.size() - 1).setX(snake.get(0).getX());

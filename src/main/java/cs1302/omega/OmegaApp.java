@@ -43,6 +43,7 @@ public class OmegaApp extends Application {
 
 
         Button rst  = new Button ("Restart");
+        Button exit  = new Button ("Exit");
 
         Label title = new Label("Snake!");
         Label instructions
@@ -50,7 +51,7 @@ public class OmegaApp extends Application {
         Separator line = new Separator();
         line.setOrientation(Orientation.HORIZONTAL);
 
-        menu.getChildren().addAll(title, rst);
+        menu.getChildren().addAll(title, rst, exit);
         menu.setSpacing(10.0);
 
         // demo game provided with the starter code
@@ -78,9 +79,10 @@ public class OmegaApp extends Application {
         EventHandler<ActionEvent> rstHandler = event -> {
             start(stage);
         };
-
+        EventHandler<ActionEvent> exitHandler = event -> System.exit(0);
 
         rst.setOnAction(rstHandler);
+        exit.setOnAction(exitHandler);
 
         // play the game
         game.play();
