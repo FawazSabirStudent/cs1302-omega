@@ -41,26 +41,24 @@ public class OmegaApp extends Application {
         // some labels to display information
         HBox menu = new HBox();
 
-        Button pause = new Button("Pause");
+
         Button rst  = new Button ("Restart");
 
         Label title = new Label("Snake!");
         Label instructions
-            = new Label("Move with arrow keys");
+            = new Label("Arrow Keys: Move");
         Separator line = new Separator();
         line.setOrientation(Orientation.HORIZONTAL);
 
-        menu.getChildren().addAll(title, pause, rst);
+        menu.getChildren().addAll(title, rst);
         menu.setSpacing(10.0);
 
         // demo game provided with the starter code
-        DemoGame game = new DemoGame(gridSize * 13, gridSize * 10);
+        DemoGame game = new DemoGame(gridSize * 10, gridSize * 10);
 
-        EventHandler<ActionEvent> pauseHandler = event -> game.pause();
-        EventHandler<ActionEvent> rstHandler = event -> game.reset();
 
-        pause.setOnAction(pauseHandler);
-        rst.setOnAction(rstHandler);
+
+
 
         // setup scene
         VBox root = new VBox(menu, instructions, line, game);
@@ -75,6 +73,14 @@ public class OmegaApp extends Application {
         stage.setOnCloseRequest(event -> Platform.exit());
         stage.sizeToScene();
         stage.show();
+
+
+        EventHandler<ActionEvent> rstHandler = event -> {
+            start(stage);
+        };
+
+
+        rst.setOnAction(rstHandler);
 
         // play the game
         game.play();
