@@ -26,6 +26,7 @@ import javafx.stage.Stage;
  */
 public class OmegaApp extends Application {
 
+    // grid square size
     private final int gridSize = 25;
 
     /**
@@ -38,16 +39,19 @@ public class OmegaApp extends Application {
     @Override
     public void start(Stage stage) {
 
-        // some labels to display information
+        // menu
         HBox menu = new HBox();
 
-
+        // buttons
         Button rst  = new Button ("Restart");
         Button exit  = new Button ("Exit");
 
+        // some labels to display information
         Label title = new Label("Snake!");
         Label instructions
             = new Label("Arrow Keys: Move");
+
+        // line that does show up
         Separator line = new Separator();
         line.setOrientation(Orientation.HORIZONTAL);
 
@@ -76,6 +80,7 @@ public class OmegaApp extends Application {
         stage.show();
 
 
+        // button handlers
         EventHandler<ActionEvent> rstHandler = event -> {
             start(stage);
         };

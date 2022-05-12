@@ -21,19 +21,36 @@ import java.util.ArrayList;
  */
 public class DemoGame extends Game {
 
+    // timer
     private int time = 0;
+
+    // score
     private int score = 0;
     private Text scoreT = new Text("Score: " + Integer.toString(score));
+
+    // size of snake segments
     private int size = 25;
+
+    // food
     private int foodX = 5 * size;
     private int foodY = 3 * size;
     private static boolean eaten = false;
+
+    // pause
     private static boolean pause = true;
+
+    // snake
     private ArrayList<Rectangle> snake = new ArrayList<>();
     private Dir face = Dir.RIGHT;
+
+    // random
     private static Random rnd = new Random();
     boolean gameOver = false;
+
+    // more food
     Rectangle food = new Rectangle(5 * size, 3 * size, size, size);
+
+    // line that doesn't show up
     Separator line = new Separator();
 
     /**
@@ -51,6 +68,8 @@ public class DemoGame extends Game {
         if (eaten) {
             foodX = size * rnd.nextInt(10);
             foodY = size * rnd.nextInt(10);
+
+            //makes sure that the food doesn't spawn where a snake segment is
             for (int i = 0; i < snake.size(); i++) {
                 if (foodX == snake.get(i).getX() && foodY == snake.get(i).getY()) {
                     spawnFood();
@@ -81,6 +100,7 @@ public class DemoGame extends Game {
      */
     public boolean selfHit() {
         for (int i = 1; i < snake.size(); i++) {
+            // checks to see if snake head is where food is
             if (snake.get(0).getX() == snake.get(i).getX() &&
                 snake.get(0).getY() == snake.get(i).getY()) {
                 return true;
@@ -113,6 +133,8 @@ public class DemoGame extends Game {
      * @param y the y coordinate of the segment
      */
     protected void addSeg(int x, int y) {
+
+        // adds a new segment where the last segment of the snake used to be
         this.snake.add(new Rectangle(x * size, y * size, size, size));
         this.getChildren().add(this.snake.get(snake.size() - 1));
     }
@@ -122,11 +144,12 @@ public class DemoGame extends Game {
     @Override
     protected void init() {
         // setup subgraph for this component
-
+        // adds three starting segments
         addSeg(5, 5);
         addSeg(4, 5);
         addSeg(3, 5);
 
+        // this is a line that refuses to show up
         line.setOrientation(Orientation.HORIZONTAL);
 
         getChildren().addAll(line, scoreT, food);         // add to main container
@@ -143,6 +166,8 @@ public class DemoGame extends Game {
      * @return whether the game is over or not.
      */
     protected boolean checkGameOver() {
+
+        // checks to see if the snake has left the bounds or hit itself
         if (snake.get(0).getY() < 0 || snake.get(0).getY() > 9 * size || snake.get(0).getX() < 0 ||
             snake.get(0).getX() > 9 * size || selfHit()) {
             gameOver = true;
@@ -158,6 +183,7 @@ public class DemoGame extends Game {
      * When the game ends.
      */
     public void gameOver() {
+        // clears screen and prints score
         scoreT.setText("Game Over! Your score was " +
                        (Integer.toString(snake.size() - 3) + "!"));
         getChildren().clear();
@@ -170,9 +196,13 @@ public class DemoGame extends Game {
     @Override
     protected void update() {
         if (checkGameOver()) {
+
+            // adds to a timer that everything runs by
             time++;
             eatFood();
             updateScore();
+
+            // updates direction based off of input
             isKeyPressed(KeyCode.LEFT, () -> face = Dir.LEFT);
             isKeyPressed(KeyCode.RIGHT, () -> face = Dir.RIGHT);
             isKeyPressed(KeyCode.UP, () -> face = Dir.UP);
@@ -184,6 +214,8 @@ public class DemoGame extends Game {
         if (time == 10 && gameOver == false) {
             time = 0;
 
+
+            // moves the snake based off of the direction it is facing
             switch (face) {
             case UP:
                 snake.get(snake.size() - 1).setY(snake.get(0).getY() - 25);
